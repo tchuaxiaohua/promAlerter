@@ -114,7 +114,8 @@ func (k *K8s) ListEvents(podInfo *PodInfo) (*PodInfo, error) {
 	if err != nil {
 		return podInfo, err
 	}
-	if podInfo.RestartCount > 0 {
+	// pod 重启次数大于 2 说明进入重启频繁期
+	if podInfo.RestartCount > 2 {
 		podInfo.Events = append(podInfo.Events, fmt.Sprintf("Pod 重启次数为 %d,请使用`kubectl logs -f -n %s %s`命令查看日志", podInfo.RestartCount, podInfo.NameSpace, podInfo.PodName))
 	} else {
 		for _, v := range podEvents.Items {
