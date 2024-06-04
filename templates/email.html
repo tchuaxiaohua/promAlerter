@@ -1,0 +1,75 @@
+{{if eq .Status "firing"}}
+========= <span style=color:red;font-size:36px;font-weight:bold;> 监控告警 </span>=========<br>
+
+<span style=font-size:20px;font-weight:bold;> 告警程序:</span>     Alertmanager <br>
+<span style=font-size:20px;font-weight:bold;> 告警类型:</span>    {{ .Labels.alertname }} <br>
+<span style=font-size:20px;font-weight:bold;> 告警级别:</span>    {{ .Labels.severity }} 级 <br>
+<span style=font-size:20px;font-weight:bold;> 告警状态:</span>    {{ .Status }} <br>
+<span style=font-size:20px;font-weight:bold;> 故障主机:</span>    {{ .Labels.instance }} <br>
+{{if .Annotations.Description }}
+<span style=font-size:20px;font-weight:bold;> 告警详情:</span>    {{ .Annotations.Description }} <br>
+{{else if .Annotations.Summary }}
+<span style=font-size:20px;font-weight:bold;> 告警详情:</span>    { .Annotations.Summary }} <br>
+{{ end }}
+<span style=font-size:20px;font-weight:bold;> 触发时间:</span>    {{ .StartsAt }} <br>
+
+========= = end =  =========<br>
+<br>
+<br>
+
+<div>
+    <div align=left style="margin:40px;border-top:solid 1px gray" id=bottomTime>
+        <p style=margin-right:20px>
+            这是一封自动发送的邮件，请勿回复
+        </p>
+    </div>
+</div>
+
+{{ else }}
+========= <span style=color:#00FF00;font-size:24px;font-weight:bold;> 告警恢复 </span>=========<br>
+<span style=font-size:20px;font-weight:bold;> 告警程序:</span>     Alertmanager <br>
+<span style=font-size:20px;font-weight:bold;> 告警类型:</span>    {{ .Labels.alertname }} <br>
+<span style=font-size:20px;font-weight:bold;> 告警级别:</span>    {{ .Labels.severity }} 级 <br>
+<span style=font-size:20px;font-weight:bold;> 告警状态:</span>    {{ .Status }} <br>
+<span style=font-size:20px;font-weight:bold;> 故障主机:</span>    {{ .Labels.instance }} <br>
+{{if .Annotations.Description }}
+<span style=font-size:20px;font-weight:bold;> 告警详情:</span>    {{ .Annotations.Description }} <br>
+{{else if .Annotations.Summary }}
+<span style=font-size:20px;font-weight:bold;> 告警详情:</span>    { .Annotations.Summary }} <br>
+{{ end }}
+<span style=font-size:20px;font-weight:bold;> 触发时间:</span>    {{ .StartsAt }} <br>
+========= = end =  =========
+<br>
+<br>
+
+<div>
+<!--    <div style=margin:40px>-->
+<!--        <p style=font-size:20px>运维部门</p>-->
+<!--        <p style=color:red;font-size:14px>-->
+<!--            (这是一封自动发送的邮件，请勿回复。)-->
+<!--        </p>-->
+<!--    </div>-->
+    <div align=left style="margin:40px;border-top:solid 1px gray" id=bottomTime>
+        <p style=margin-right:20px>
+            这是一封自动发送的邮件，请勿回复
+        </p>
+    </div>
+</div>
+{{ end }}
+
+
+<!--{{ define "email.from" }}xxx@olzl.cn{{ end }}-->
+<!--{{ define "email.to" }}xxx@olzl.net{{ end }}-->
+<!--{{ define "email.tmpl" }}-->
+<!--{{ range .Alerts }}-->
+<!--=========start==========<br>-->
+<!--告警程序：prometheus_alert <br>-->
+<!--告警级别：{{ .Labels.severity }} 级 <br>-->
+<!--告警类型：{{ .Labels.alertname }} <br>-->
+<!--故障主机：{{ .Labels.instance }} <br>-->
+<!--告警主题：{{ .Annotations.summary }} <br>-->
+<!--告警详情：{{ .Annotations.description }} <br>-->
+<!--触发时间：{{ .StartsAt.Format "2021-06-01 12:00:00" }} <br>-->
+<!--=========end==========<br>-->
+<!--{{ end }}-->
+<!--{{ end }}-->
