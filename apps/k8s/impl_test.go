@@ -41,4 +41,5 @@ func TestK8sGetPod(t *testing.T) {
 		t.Errorf("Exec failed with error: %v", err)
 	}
 	fmt.Println(podObj.PodIP)
+	fmt.Println(podObj.RestartCount)
 }

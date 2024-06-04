@@ -87,9 +87,17 @@ func (k *K8s) GetPod(podInfo *PodInfo) (*PodInfo, error) {
 	pod, err := k.ClientSet.CoreV1().Pods(podInfo.NameSpace).Get(context.TODO(), podInfo.PodName, metav1.GetOptions{})
 	if err != nil {
 		zap.L().Error("GetPod failed", zap.String("message", "根据pod名称获取podIP失败"), zap.String("error", err.Error()))
-		return nil, err
+		return podInfo, err
 	}
+	// pod IP
 	podInfo.PodIP = pod.Status.PodIP
+
+	// 获取Pod的重启次数
+	restartCount := 0
+	for _, containerStatus := range pod.Status.ContainerStatuses {
+		restartCount += int(containerStatus.RestartCount)
+	}
+	podInfo.RestartCount = restartCount
 	zap.L().Info("GetPod succeeded", zap.String("PodIP", podInfo.PodIP))
 	return podInfo, nil
 }
@@ -101,14 +109,23 @@ func (k *K8s) ListEvents(podInfo *PodInfo) (*PodInfo, error) {
 		zap.L().Error("ListEvents failed", zap.String("message", "获取pod事件失败"), zap.String("error", err.Error()))
 		return podInfo, err
 	}
-
-	for _, v := range podEvents.Items {
-		if v.Type == "Normal" {
-			continue
-		}
-		if strings.HasPrefix(v.Name, podInfo.PodName) {
-			podInfo.Events = append(podInfo.Events, v.Message)
+	// 判断 pod 重启次数
+	podInfo, err = k.GetPod(podInfo)
+	if err != nil {
+		return podInfo, err
+	}
+	if podInfo.RestartCount > 0 {
+		podInfo.Events = append(podInfo.Events, fmt.Sprintf("Pod 重启次数为 %d,请使用`kubectl logs -f -n %s %s`命令查看日志", podInfo.RestartCount, podInfo.NameSpace, podInfo.PodName))
+	} else {
+		for _, v := range podEvents.Items {
+			if v.Type == "Normal" {
+				continue
+			}
+			if strings.HasPrefix(v.Name, podInfo.PodName) {
+				podInfo.Events = append(podInfo.Events, v.Message)
+			}
 		}
 	}
+
 	return podInfo, nil
 }

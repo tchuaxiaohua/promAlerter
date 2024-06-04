@@ -15,10 +15,11 @@ type K8s struct {
 }
 
 type PodInfo struct {
-	PodName   string
-	NameSpace string
-	PodIP     string
-	Events    []string
+	PodName      string
+	NameSpace    string
+	PodIP        string
+	RestartCount int
+	Events       []string
 }
 
 func NewPodInfo() *PodInfo {
