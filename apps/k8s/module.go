@@ -6,6 +6,8 @@ import (
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	"runtime"
+	"sync"
+	"time"
 )
 
 // K8s 结构体
@@ -51,4 +53,45 @@ func NewK8s() *K8s {
 		ClientSet: k8sClient,
 		Config:    k8sConfig,
 	}
+}
+
+type TokenBucket struct {
+	mu         sync.Mutex
+	capacity   int           // 桶的容量
+	tokens     int           // 当前令牌数
+	refillRate time.Duration // 令牌补充速率，例如每秒补充一个令牌
+	lastRefill time.Time     // 上次补充令牌的时间
+}
+
+func NewTokenBucket(capacity int, refillRate time.Duration) *TokenBucket {
+	return &TokenBucket{
+		capacity:   capacity,
+		tokens:     capacity, // 初始化时桶满
+		refillRate: refillRate,
+		lastRefill: time.Now(),
+	}
+}
+
+func (tb *TokenBucket) Take() bool {
+	tb.mu.Lock()
+	defer tb.mu.Unlock()
+
+	now := time.Now()
+	elapsed := now.Sub(tb.lastRefill)
+	refillAmount := elapsed / tb.refillRate
+	newTokens := tb.tokens + int(refillAmount.Seconds())
+
+	if newTokens > tb.capacity {
+		newTokens = tb.capacity
+	}
+
+	tb.tokens = newTokens
+	tb.lastRefill = now
+
+	if tb.tokens < 1 {
+		return false // 没有足够的令牌，不能继续
+	}
+
+	tb.tokens--
+	return true // 有足够的令牌，可以继续
 }
