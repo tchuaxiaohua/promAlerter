@@ -1,10 +1,11 @@
 package notify
 
 import (
+	"github.com/tchuaxiaohua/promAlerter/apps/notify"
+	"github.com/tchuaxiaohua/promAlerter/apps/prometheus"
+	"github.com/tchuaxiaohua/promAlerter/svc"
+
 	"github.com/gin-gonic/gin"
-	"github.com/tchuaxiaohua/promDingTalk/apps/notify"
-	"github.com/tchuaxiaohua/promDingTalk/apps/prometheus"
-	"github.com/tchuaxiaohua/promDingTalk/svc"
 	"go.uber.org/zap"
 )
 

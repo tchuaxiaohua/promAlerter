@@ -2,10 +2,10 @@ package notify
 
 import (
 	"github.com/CatchZeng/dingtalk/pkg/dingtalk"
-	"go.uber.org/zap"
+	"github.com/tchuaxiaohua/promAlerter/apps/prometheus"
+	"github.com/tchuaxiaohua/promAlerter/utils"
 
-	"github.com/tchuaxiaohua/promDingTalk/apps/prometheus"
-	"github.com/tchuaxiaohua/promDingTalk/utils"
+	"go.uber.org/zap"
 )
 
 // Send 通过钉钉发送告警

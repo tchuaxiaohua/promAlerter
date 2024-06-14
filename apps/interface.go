@@ -1,10 +1,10 @@
 package apps
 
 import (
-	"github.com/tchuaxiaohua/promDingTalk/apps/k8s"
-	"github.com/tchuaxiaohua/promDingTalk/apps/notify"
-	"github.com/tchuaxiaohua/promDingTalk/apps/prometheus"
-	"github.com/tchuaxiaohua/promDingTalk/svc"
+	"github.com/tchuaxiaohua/promAlerter/apps/k8s"
+	"github.com/tchuaxiaohua/promAlerter/apps/notify"
+	"github.com/tchuaxiaohua/promAlerter/apps/prometheus"
+	"github.com/tchuaxiaohua/promAlerter/svc"
 )
 
 type K8sService interface {

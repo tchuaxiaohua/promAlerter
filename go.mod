@@ -1,4 +1,4 @@
-module github.com/tchuaxiaohua/promDingTalk
+module github.com/tchuaxiaohua/promAlerter
 
 go 1.20
 

@@ -2,13 +2,15 @@ package prometheus
 
 import (
 	"fmt"
-	"github.com/pkg/errors"
-	"github.com/tchuaxiaohua/promDingTalk/apps/k8s"
-	"github.com/tchuaxiaohua/promDingTalk/config"
-	"github.com/tchuaxiaohua/promDingTalk/utils"
-	"github.com/tchuaxiaohua/promDingTalk/vars"
-	"go.uber.org/zap"
 	"time"
+
+	"github.com/tchuaxiaohua/promAlerter/apps/k8s"
+	"github.com/tchuaxiaohua/promAlerter/config"
+	"github.com/tchuaxiaohua/promAlerter/utils"
+	"github.com/tchuaxiaohua/promAlerter/vars"
+
+	"github.com/pkg/errors"
+	"go.uber.org/zap"
 )
 
 // Dump 执行 JVM 内存快照导出操作

@@ -3,9 +3,9 @@ package notify
 import (
 	"fmt"
 
-	"github.com/tchuaxiaohua/promDingTalk/apps/prometheus"
-	"github.com/tchuaxiaohua/promDingTalk/config"
-	"github.com/tchuaxiaohua/promDingTalk/svc"
+	"github.com/tchuaxiaohua/promAlerter/apps/prometheus"
+	"github.com/tchuaxiaohua/promAlerter/config"
+	"github.com/tchuaxiaohua/promAlerter/svc"
 )
 
 func (n *NotificationConfig) ProcessAlert(alert prometheus.Alert, svc *svc.AppService, notificationConfig *NotificationConfig) error {

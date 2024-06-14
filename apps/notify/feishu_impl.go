@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/tchuaxiaohua/promDingTalk/apps/prometheus"
+	"github.com/tchuaxiaohua/promAlerter/apps/prometheus"
 )
 
 // Send 通过飞书发送告警

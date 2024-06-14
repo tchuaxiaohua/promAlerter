@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"github.com/tchuaxiaohua/promDingTalk/apps/k8s"
-	"github.com/tchuaxiaohua/promDingTalk/config"
+	"github.com/tchuaxiaohua/promAlerter/apps/k8s"
+	"github.com/tchuaxiaohua/promAlerter/config"
 )
 
 type AppService struct {

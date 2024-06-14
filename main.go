@@ -1,11 +1,13 @@
 package main
 
 import (
-	"github.com/tchuaxiaohua/promDingTalk/config"
-	"github.com/tchuaxiaohua/promDingTalk/routers"
-	"github.com/tchuaxiaohua/promDingTalk/svc"
-	"go.uber.org/zap"
 	"runtime"
+
+	"github.com/tchuaxiaohua/promAlerter/config"
+	"github.com/tchuaxiaohua/promAlerter/routers"
+	"github.com/tchuaxiaohua/promAlerter/svc"
+
+	"go.uber.org/zap"
 )
 
 func main() {

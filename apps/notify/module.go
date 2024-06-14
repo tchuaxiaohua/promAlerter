@@ -1,7 +1,7 @@
 package notify
 
 import (
-	"github.com/tchuaxiaohua/promDingTalk/apps/prometheus"
+	"github.com/tchuaxiaohua/promAlerter/apps/prometheus"
 )
 
 // notifierService 告警发送接口

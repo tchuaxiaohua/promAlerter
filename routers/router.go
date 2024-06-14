@@ -1,10 +1,11 @@
 package routers
 
 import (
-	"github.com/tchuaxiaohua/promDingTalk/config"
-	"github.com/tchuaxiaohua/promDingTalk/routers/notify"
-	"github.com/tchuaxiaohua/promDingTalk/svc"
 	"time"
+
+	"github.com/tchuaxiaohua/promAlerter/config"
+	"github.com/tchuaxiaohua/promAlerter/routers/notify"
+	"github.com/tchuaxiaohua/promAlerter/svc"
 
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"

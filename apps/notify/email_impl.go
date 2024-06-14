@@ -1,10 +1,10 @@
 package notify
 
 import (
-	"github.com/tchuaxiaohua/promDingTalk/apps/prometheus"
-	"github.com/tchuaxiaohua/promDingTalk/utils"
-	"go.uber.org/zap"
+	"github.com/tchuaxiaohua/promAlerter/apps/prometheus"
+	"github.com/tchuaxiaohua/promAlerter/utils"
 
+	"go.uber.org/zap"
 	"gopkg.in/gomail.v2"
 )
 
